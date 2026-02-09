@@ -5,10 +5,10 @@ import { ReadingProgressIndicator } from '@/components/ReadingProgressIndicator'
 import { StoryListItem } from '@/components/StoryListItem';
 import { FavoriteIcon } from '@/components/ui/FavoriteIcon';
 import { useFavorites } from '@/data/favorites';
-import { Story } from '@/data/fetch-stories';
 import { i18n } from '@/data/i18n';
 import { useLastReadStory } from '@/data/last-read';
 import { useStories } from '@/data/queries/stories';
+import { Story } from "@/data/Story";
 import { Ionicons } from '@expo/vector-icons';
 import { FlashList } from '@shopify/flash-list';
 import { Search } from '@tamagui/lucide-icons';
@@ -25,8 +25,8 @@ export default function MainScreen() {
   const [search, setSearch] = useState('');
   const [showFavorites, setShowFavorites] = useState(false);
   const { data: favorites = [] } = useFavorites();
-  const {color} = useTheme()
-  
+  const { color } = useTheme()
+
   useEffect(() => {
     setShowFavorites(params.favorites === 'true');
   }, [params.favorites]);
@@ -90,17 +90,24 @@ export default function MainScreen() {
       />
 
       {!showFavorites && (
-        <XStack alignItems="center" margin="$2" backgroundColor="$background" borderRadius={8} paddingHorizontal="$2" >
+        <XStack 
+          alignItems="center" 
+          margin="$2"
+          backgroundColor="$inputBackground" 
+          borderRadius={8}
+          paddingHorizontal="$2" 
+          borderColor="$inputBorder"
+          borderWidth={1} 
+          >
           <Search size={20} color="$color" />
           <Input
             flex={1}
             placeholder={i18n.t('app.searchStories')}
             value={search}
             onChangeText={setSearch}
-            // backgroundColor="$background"
             borderWidth={0}
-            // color="$color"
-            // placeholderTextColor="$color"
+            placeholderTextColor="$placeholder"
+            backgroundColor="transparent"
           />
         </XStack>
       )}

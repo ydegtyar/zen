@@ -1,4 +1,4 @@
-import { queryClient } from '@/app/data/query-client';
+import { queryClient } from '@/data/query-client';
 import { ZenThemeProvider } from '@/components/ZenThemeProvider';
 import {
   WorkSans_400Regular,

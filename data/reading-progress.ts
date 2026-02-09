@@ -1,4 +1,4 @@
-import { queryClient } from '@/app/data/query-client';
+import { queryClient } from '@/data/query-client';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { QueryObserverOptions, useQuery } from '@tanstack/react-query';
 import { map, uniq } from 'lodash';

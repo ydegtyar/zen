@@ -30,7 +30,7 @@ function StoryParagraph({ children }: { children: React.ReactNode }) {
 }
 
 export default function StoryScreen() {
-  const {color} = useTheme()
+  const {color, background, gray2} = useTheme()
   const { id } = useLocalSearchParams();
   const { data: story, isLoading } = useStory(Number(id));
   const setLastRead = useLastReadStore(state => state.setLastRead);
@@ -102,12 +102,12 @@ export default function StoryScreen() {
                   asChild
                 >
                   <TouchableHighlight
-                    underlayColor="#999"
+                    underlayColor={gray2.val}
                     style={{
                       flexShrink: 1,
                       width: '50%',
                       height: '100%',
-                      backgroundColor: '#F0F2F5',
+                      backgroundColor: gray2.val,
                       borderRadius: 12, 
                       paddingVertical: 12, 
                       paddingHorizontal: 8, 
@@ -118,8 +118,8 @@ export default function StoryScreen() {
                     }}
                   >
                     <View style={{ gap: 4, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                      <Ionicons name="chevron-back" size={20} />
-                      <Text numberOfLines={2} style={{ flex: 1 }}>{prevStory.title}</Text>
+                      <Ionicons name="chevron-back" size={20} color={color.val} />
+                      <Text numberOfLines={2} style={{ flex: 1 }} color="$color">{prevStory.title}</Text>
                     </View>
                   </TouchableHighlight>
                 </Link>
@@ -130,17 +130,24 @@ export default function StoryScreen() {
                   asChild
                 >
                   <TouchableHighlight
-                    underlayColor="#999"
+                    underlayColor={gray2.val}
                     style={{
                       width: '50%',
                       flexShrink: 1,
                       height: '100%',
-                      borderRadius: 12, paddingVertical: 12, paddingHorizontal: 8, flexDirection: 'row', alignItems: 'center', gap: 8, justifyContent: 'flex-end', backgroundColor: '#F0F2F5'
+                      borderRadius: 12, 
+                      paddingVertical: 12, 
+                      paddingHorizontal: 8, 
+                      flexDirection: 'row', 
+                      alignItems: 'center', 
+                      gap: 8, 
+                      justifyContent: 'flex-end', 
+                      backgroundColor: gray2.val
                     }}
                   >
                     <View style={{ gap: 4, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
                       <Text color='$color' numberOfLines={2} style={{ flex: 1, textAlign: 'right' }}>{nextStory.title}</Text>
-                      <Ionicons name="chevron-forward" size={20} />
+                      <Ionicons name="chevron-forward" size={20} color={color.val} />
                     </View>
                   </TouchableHighlight>
                 </Link>

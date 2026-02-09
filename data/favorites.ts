@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useQuery } from '@tanstack/react-query';
 import { uniq } from 'lodash';
-import { queryClient } from '@/app/data/query-client';
+import { queryClient } from '@/data/query-client';
 
 const FAVORITES_KEY = 'favorites';
 const FAVORITES_QUERY_KEY = ['favorites'];

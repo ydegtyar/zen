@@ -1,4 +1,4 @@
-import { queryClient } from '@/app/data/query-client';
+import { queryClient } from '@/data/query-client';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useQuery } from '@tanstack/react-query';
 import { useColorScheme } from 'react-native';
@@ -9,12 +9,11 @@ export enum Theme {
   Dark = 'dark'
 }
 
+
 const THEME_KEY = ['theme'];
 export const STORAGE_KEY = 'app_theme';
 
 export const useAppTheme = () => {
-  const systemTheme = useColorScheme();
-
   const query = useQuery({
     queryKey: THEME_KEY,
     queryFn: async (): Promise<Theme> => {

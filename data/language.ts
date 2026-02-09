@@ -1,4 +1,4 @@
-import { queryClient } from '@/app/data/query-client';
+import { queryClient } from '@/data/query-client';
 import { i18n } from '@/data/i18n';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useQuery } from '@tanstack/react-query';

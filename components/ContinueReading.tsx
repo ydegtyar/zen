@@ -1,23 +1,25 @@
-import { Story } from '@/data/fetch-stories';
+import { Story } from "@/data/Story";
 import { i18n } from '@/data/i18n';
 import { Image } from 'expo-image';
 import { Link } from 'expo-router';
 import { TouchableHighlight } from 'react-native';
-import { Text, XStack, YStack } from 'tamagui';
+import { Text, XStack, YStack, useTheme } from 'tamagui';
 
 interface Props {
   story: Story;
 }
 
 export function ContinueReading({ story }: Props) {
+  const theme = useTheme();
+  
   return (
     <Link
       href={{ pathname: '/stories/[id]', params: { id: String(story.index) } }}
       asChild
     >
       <TouchableHighlight
-        underlayColor="#d1fae5"
-        style={{ borderRadius: 16, marginVertical: 8, width: '100%', backgroundColor: '#fff' }}
+        underlayColor={theme.background.val}
+        style={{ borderRadius: 16, marginVertical: 8, width: '100%', backgroundColor: theme.background.val }}
       >
         <XStack paddingHorizontal="$3" paddingVertical="$2" alignItems="flex-start" gap="$3" >
           <YStack flex={1}>

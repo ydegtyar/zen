@@ -1,7 +1,8 @@
 
 import { QueryObserverOptions, useQuery } from '@tanstack/react-query';
-import { fetchStories, Story } from '../fetch-stories';
+import { fetchStories } from '../fetch-stories';
 import { Language, useLanguage } from '../language';
+import { Story } from "../Story";
 
 export function useStories(
   options?: { select?: QueryObserverOptions<Story[]>['select'], enabled?: boolean }

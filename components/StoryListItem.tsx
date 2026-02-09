@@ -1,11 +1,11 @@
-import { Story } from '@/data/fetch-stories';
+import { Story } from "@/data/Story";
 import { useIsRead } from '@/data/reading-progress';
 import { Image } from 'expo-image';
 import { Link } from 'expo-router';
 import React, { useEffect } from 'react';
 import { TouchableHighlight } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
-import { Text, XStack, YStack } from 'tamagui';
+import { Text, XStack, YStack, useTheme } from 'tamagui';
 
 interface Props {
   story: Story;
@@ -14,6 +14,7 @@ interface Props {
 export function StoryListItem({ story }: Props) {
   const opacity = useSharedValue(0);
   const isRead = useIsRead(story.index);
+  const theme = useTheme();
 
   const animatedStyle = useAnimatedStyle(() => ({
     opacity: withTiming(opacity.value, { duration: 400 }),
@@ -24,6 +25,7 @@ export function StoryListItem({ story }: Props) {
     opacity.value = 1;
   }, [story.index, opacity]);
 
+  
   return (
     <Animated.View
       style={animatedStyle}
@@ -34,8 +36,13 @@ export function StoryListItem({ story }: Props) {
         asChild
       >
         <TouchableHighlight
-          underlayColor="#d1fae5"
-          style={{ borderRadius: 16, marginHorizontal: 0, marginVertical: 2, backgroundColor: isRead ? 'transparent' : '#fff' }}
+          underlayColor={theme.background.val}
+          style={{ 
+            borderRadius: 16, 
+            marginHorizontal: 0, 
+            marginVertical: 2, 
+            backgroundColor: isRead ? theme.gray3.val : theme.background.val 
+          }}
         >
           <XStack paddingHorizontal="$3" paddingVertical="$2" alignItems="center" gap="$3">
             <Image

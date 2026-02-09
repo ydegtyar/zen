@@ -1,7 +1,7 @@
 import { shorthands } from '@tamagui/shorthands'
-import { tokens as baseTokens, themes } from '@tamagui/themes'
+import { tokens as baseTokens } from '@tamagui/themes'
 import { createTamagui } from 'tamagui'
-
+import { themes } from './themes'
 
 const config = createTamagui({
   defaultTheme: 'light',
@@ -84,20 +84,7 @@ const config = createTamagui({
       },
     },
   },
-  themes: {
-    light: {
-      ...themes.light,
-      color: '#000',
-      iconColor: '#000',
-      buttonIconColor: '#000',
-    },
-    dark: {
-      ...themes.dark,
-      color: '#fff',
-      iconColor: '#fff',
-      buttonIconColor: '#fff',
-    },
-  },
+  themes,
   tokens: {
     ...baseTokens,
     space: {

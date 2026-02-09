@@ -15,5 +15,11 @@
       "light": "Light",
       "dark": "Dark"
     }
+  },
+  "favorites": {
+    "empty": {
+      "title": "Your favorites are still and quiet.",
+      "body": "Like a calm pond, waiting for reflections.\nAdd what brings you peace."
+    }
   }
 }

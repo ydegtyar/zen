@@ -1,0 +1,19 @@
+{
+  "app": {
+    "title": "101 zen story",
+    "continueReading": "Continue Reading",
+    "previous": "Previous",
+    "next": "Next",
+    "searchStories": "Search stories"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "theme":{
+      "title": "Theme",
+      "auto": "Auto",
+      "light": "Light",
+      "dark": "Dark"
+    }
+  }
+}

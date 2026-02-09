@@ -1,0 +1,19 @@
+{
+  "app": {
+    "title": "101 история дзен",
+    "continueReading": "Продолжить чтение",
+    "previous": "Предыдущая",
+    "next": "Следующая",
+    "searchStories": "Поиск историй"
+  },
+  "settings": {
+    "title": "Настройки",
+    "language": "Язык",
+    "theme":{
+      "title": "Тема",
+      "auto": "Авто",
+      "light": "Светлая",
+      "dark": "Тёмная"
+    }
+  }
+}

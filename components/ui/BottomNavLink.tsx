@@ -1,6 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Href, Link } from 'expo-router';
 import { Button, Text, useTheme, XStack } from 'tamagui';
+import { lightHaptic } from '@/utils/haptics';
 
 type Props = {
   href: Href;
@@ -26,6 +27,9 @@ export function BottomNavLink({ href, title, direction }: Props) {
         justifyContent={isPrev ? 'flex-start' : 'flex-end'}
         alignItems="center"
         pressStyle={{ backgroundColor: '$gray2', opacity: 0.9, scale: 0.98 }}
+        onPressIn={() => {
+          void lightHaptic();
+        }}
         aria-label={isPrev ? 'Previous story' : 'Next story'}
       >
         <XStack

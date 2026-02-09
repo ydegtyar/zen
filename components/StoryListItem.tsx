@@ -6,6 +6,7 @@ import React, { useEffect } from 'react';
 import { TouchableHighlight } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { Text, XStack, YStack, useTheme } from 'tamagui';
+import { lightHaptic } from '@/utils/haptics';
 
 interface Props {
   story: Story;
@@ -37,6 +38,9 @@ export function StoryListItem({ story }: Props) {
       >
         <TouchableHighlight
           underlayColor={theme.background.val}
+          onPressIn={() => {
+            void lightHaptic();
+          }}
           style={{ 
             borderRadius: 16, 
             marginHorizontal: 0, 

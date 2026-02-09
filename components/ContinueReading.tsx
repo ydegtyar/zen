@@ -4,6 +4,7 @@ import { Image } from 'expo-image';
 import { Link } from 'expo-router';
 import { TouchableHighlight } from 'react-native';
 import { Text, XStack, YStack, useTheme } from 'tamagui';
+import { lightHaptic } from '@/utils/haptics';
 
 interface Props {
   story: Story;
@@ -19,6 +20,9 @@ export function ContinueReading({ story }: Props) {
     >
       <TouchableHighlight
         underlayColor={theme.background.val}
+        onPressIn={() => {
+          void lightHaptic();
+        }}
         style={{ borderRadius: 16, marginVertical: 8, width: '100%', backgroundColor: theme.background.val }}
       >
         <XStack paddingHorizontal="$3" paddingVertical="$2" alignItems="flex-start" gap="$3" >

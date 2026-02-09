@@ -18,6 +18,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import Collapsible from 'react-native-collapsible';
 import { Button, H4, Input, Spinner, useTheme, XStack, YStack } from 'tamagui';
+import { lightHaptic } from '@/utils/haptics';
 
 export default function MainScreen() {
   const router = useRouter();
@@ -59,6 +60,9 @@ export default function MainScreen() {
           <Button
             size="$3"
             chromeless
+            onPressIn={() => {
+              void lightHaptic();
+            }}
             onPress={() => router.push('/settings')}
             aria-label="Settings"
           >
@@ -67,6 +71,9 @@ export default function MainScreen() {
         }
         middleSlot={
           <TouchableOpacity
+            onPressIn={() => {
+              void lightHaptic();
+            }}
             onPress={() => {
               router.push({
                 pathname: '/stories/[id]',
@@ -81,6 +88,9 @@ export default function MainScreen() {
           <Button
             size="$3"
             chromeless
+            onPressIn={() => {
+              void lightHaptic();
+            }}
             onPress={handleFavoritePress}
             aria-label="Favorites"
           >

@@ -5,6 +5,7 @@ import { setTheme, Theme, useAppTheme } from '@/data/theme';
 import { ArrowLeft, Contrast, Moon, Sun } from '@tamagui/lucide-icons';
 import { Link } from 'expo-router';
 import { Button, H4, H5, Text, XStack, YStack } from 'tamagui';
+import { lightHaptic } from '@/utils/haptics';
 
 const LANGUAGES = [
   { code: Language.En, label: 'English' },
@@ -27,7 +28,14 @@ export default function SettingsScreen() {
       <Header
         startSlot={
           <Link href={{ pathname: '/' }} asChild>
-            <Button size="$3" chromeless aria-label="Back">
+            <Button
+              size="$3"
+              chromeless
+              aria-label="Back"
+              onPressIn={() => {
+                void lightHaptic();
+              }}
+            >
               <ArrowLeft />
             </Button>
           </Link>
@@ -44,6 +52,9 @@ export default function SettingsScreen() {
               size="$4"
               borderWidth={1}
               themeInverse={language === lang.code}
+              onPressIn={() => {
+                void lightHaptic();
+              }}
               onPress={() => setLanguage(lang.code as Language)}
             >
               {lang.label}
@@ -59,6 +70,9 @@ export default function SettingsScreen() {
               size="$4"
               themeInverse={theme === item.value}
               borderWidth={1}
+              onPressIn={() => {
+                void lightHaptic();
+              }}
               onPress={() => setTheme(item.value)}
               flex={1}
             >

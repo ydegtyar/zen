@@ -11,6 +11,7 @@ import { Link, useLocalSearchParams } from 'expo-router';
 import React, { useEffect } from 'react';
 import { Dimensions, ScrollView, View } from 'react-native';
 import { Button, H6, Text, useTheme, XStack, YStack } from 'tamagui';
+import { lightHaptic } from '@/utils/haptics';
 
 function StoryParagraph({ children }: { children: React.ReactNode }) {
   return (
@@ -61,6 +62,9 @@ export default function StoryScreen() {
             <Button
               size="$3"
               chromeless
+              onPressIn={() => {
+                void lightHaptic();
+              }}
               aria-label="Back"
             >
               <Ionicons name="arrow-back" size={24}  color={color.val}/>
@@ -74,6 +78,9 @@ export default function StoryScreen() {
           <Button
             size="$3"
             chromeless
+            onPressIn={() => {
+              void lightHaptic();
+            }}
             onPress={() => isFavorite ? removeFavorite(story.index) : addFavorite(story.index)}
             aria-label="Favorite"
           >

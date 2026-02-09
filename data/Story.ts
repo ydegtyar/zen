@@ -1,4 +1,3 @@
-
 export type Story = {
   index: number;
   title: string;

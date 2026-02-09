@@ -1,4 +1,5 @@
 import { Header } from '@/components/Header';
+import { BottomNavLink } from '@/components/ui/BottomNavLink';
 import { FavoriteIcon } from '@/components/ui/FavoriteIcon';
 import { addFavorite, removeFavorite, useIsFavorite } from '@/data/favorites';
 import { useLastReadStore } from '@/data/last-read';
@@ -8,7 +9,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Image } from 'expo-image';
 import { Link, useLocalSearchParams } from 'expo-router';
 import React, { useEffect } from 'react';
-import { Dimensions, ScrollView, TouchableHighlight, View } from 'react-native';
+import { Dimensions, ScrollView, View } from 'react-native';
 import { Button, H6, Text, useTheme, XStack, YStack } from 'tamagui';
 
 function StoryParagraph({ children }: { children: React.ReactNode }) {
@@ -30,7 +31,7 @@ function StoryParagraph({ children }: { children: React.ReactNode }) {
 }
 
 export default function StoryScreen() {
-  const {color, background, gray2} = useTheme()
+  const { color, background } = useTheme()
   const { id } = useLocalSearchParams();
   const { data: story, isLoading } = useStory(Number(id));
   const setLastRead = useLastReadStore(state => state.setLastRead);
@@ -95,63 +96,25 @@ export default function StoryScreen() {
             ))}
           </View>
           <YStack marginTop="$4">
-            <XStack justifyContent="space-between" alignItems="center" gap="$4" paddingHorizontal={'$0'}>
+            <XStack justifyContent="space-between" alignItems="stretch" paddingHorizontal="$0" gap="$2">
               {prevStory ? (
-                <Link
+                <BottomNavLink
+                  direction="prev"
+                  title={prevStory.title}
                   href={{ pathname: '/stories/[id]', params: { id: String(prevStory.index) } }}
-                  asChild
-                >
-                  <TouchableHighlight
-                    underlayColor={gray2.val}
-                    style={{
-                      flexShrink: 1,
-                      width: '50%',
-                      height: '100%',
-                      backgroundColor: gray2.val,
-                      borderRadius: 12, 
-                      paddingVertical: 12, 
-                      paddingHorizontal: 8, 
-                      flexDirection: 'row', 
-                      alignItems: 'center', 
-                      gap: 8,
-                      justifyContent: 'flex-start',
-                    }}
-                  >
-                    <View style={{ gap: 4, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                      <Ionicons name="chevron-back" size={20} color={color.val} />
-                      <Text numberOfLines={2} style={{ flex: 1 }} color="$color">{prevStory.title}</Text>
-                    </View>
-                  </TouchableHighlight>
-                </Link>
-              ) : <View style={{ width: '50%' }} />}
+                />
+              ) : (
+                <View style={{ flex: 1, minHeight: 68 }} />
+              )}
               {nextStory ? (
-                <Link
+                <BottomNavLink
+                  direction="next"
+                  title={nextStory.title}
                   href={{ pathname: '/stories/[id]', params: { id: String(nextStory.index) } }}
-                  asChild
-                >
-                  <TouchableHighlight
-                    underlayColor={gray2.val}
-                    style={{
-                      width: '50%',
-                      flexShrink: 1,
-                      height: '100%',
-                      borderRadius: 12, 
-                      paddingVertical: 12, 
-                      paddingHorizontal: 8, 
-                      flexDirection: 'row', 
-                      alignItems: 'center', 
-                      gap: 8, 
-                      justifyContent: 'flex-end', 
-                      backgroundColor: gray2.val
-                    }}
-                  >
-                    <View style={{ gap: 4, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                      <Text color='$color' numberOfLines={2} style={{ flex: 1, textAlign: 'right' }}>{nextStory.title}</Text>
-                      <Ionicons name="chevron-forward" size={20} color={color.val} />
-                    </View>
-                  </TouchableHighlight>
-                </Link>
-              ) : <View style={{ width: '50%' }} />}
+                />
+              ) : (
+                <View style={{ flex: 1, minHeight: 68 }} />
+              )}
             </XStack>
           </YStack>
         </YStack>

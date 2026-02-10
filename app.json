@@ -1,9 +1,15 @@
 {
   "expo": {
-    "name": "zen",
+    "name": "Zen",
     "slug": "zen",
+    "description": "A calm, focused reader for 101 Zen stories.",
     "version": "1.0.0",
     "scheme": "zen",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
     "orientation": "portrait",
     "icon": "./assets/icons/icon.png",
     "userInterfaceStyle": "automatic",
@@ -16,9 +22,16 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ydegtyar.zen",
+      "buildNumber": "1",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
+      "package": "com.ydegtyar.zen",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/icons/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -29,6 +42,13 @@
       "bundler": "metro",
       "output": "static",
       "favicon": "./assets/icons/favicon.png"
+    },
+    "extra": {
+      "links": {
+        "privacyPolicyUrl": "https://zen-101.vercel.app/privacy",
+        "termsOfServiceUrl": "https://zen-101.vercel.app/terms",
+        "supportUrl": "https://zen-101.vercel.app/support"
+      }
     },
     "plugins": [
       "expo-router",

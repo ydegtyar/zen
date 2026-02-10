@@ -1,0 +1,307 @@
+:root {
+  /* Mobile app palette (see `constants/Colors.ts`) */
+  --bg: #ffffff;
+  --text: #11181c;
+  --muted: #687076;
+
+  --card: #ffffff;
+  --surface: #f8f9fa;
+  --border: #e1e5e9;
+  --divider: #f1f3f4;
+
+  --input-bg: #f8f9fa;
+  --input-border: #e1e5e9;
+  --placeholder: #9ca3af;
+
+  --button-bg: #f1f3f4;
+  --button-border: #d1d5db;
+  --button-pressed: #e5e7eb;
+
+  --shadow: rgba(0, 0, 0, 0.08);
+  --ring: rgba(17, 24, 28, 0.14);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  color: var(--text);
+  background: var(--bg);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.skipLink {
+  position: absolute;
+  left: -9999px;
+  top: 8px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.skipLink:focus {
+  left: 8px;
+  outline: none;
+  box-shadow: 0 0 0 3px var(--ring);
+}
+
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 32px 18px 56px;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  border-radius: 14px;
+  box-shadow: 0 12px 32px var(--shadow);
+}
+
+.navLinks {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.pill {
+  padding: 8px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.pill:hover {
+  border-color: var(--button-border);
+}
+
+.hero {
+  padding: 28px 12px 10px;
+}
+
+.title {
+  font-size: 44px;
+  letter-spacing: -0.03em;
+  margin: 0;
+  line-height: 1.06;
+}
+
+.subtitle {
+  margin: 12px 0 0;
+  color: rgba(17, 24, 28, 0.72);
+  font-size: 16px;
+  line-height: 1.55;
+  max-width: 52ch;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 12px;
+  padding: 16px 0 0;
+}
+
+.card {
+  grid-column: span 6;
+  padding: 16px;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  box-shadow: 0 18px 44px var(--shadow);
+}
+
+.card h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+}
+
+.card p {
+  margin: 0;
+  color: rgba(17, 24, 28, 0.72);
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.ctaRow {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--button-border);
+  background: var(--button-bg);
+}
+
+.cta:hover {
+  border-color: rgba(0, 0, 0, 0.22);
+}
+
+.ctaSecondary {
+  border-color: var(--border);
+  background: var(--surface);
+}
+
+.ctaSecondary:hover {
+  border-color: rgba(0, 0, 0, 0.22);
+}
+
+.contentCard {
+  margin-top: 16px;
+  padding: 18px;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  box-shadow: 0 18px 44px var(--shadow);
+}
+
+.contentCard h1 {
+  margin: 0 0 10px;
+  font-size: 22px;
+}
+
+.contentCard h2 {
+  margin: 18px 0 8px;
+  font-size: 16px;
+}
+
+.contentCard p,
+.contentCard li {
+  color: rgba(17, 24, 28, 0.78);
+  line-height: 1.7;
+}
+
+.contentCard ul {
+  margin: 8px 0 0;
+  padding-left: 18px;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--input-border);
+  background: var(--input-bg);
+  color: var(--text);
+  outline: none;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--placeholder);
+}
+
+.input:focus,
+.textarea:focus {
+  box-shadow: 0 0 0 3px var(--ring);
+}
+
+.textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.buttonRow {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.button {
+  cursor: pointer;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--button-border);
+  background: var(--button-bg);
+  color: var(--text);
+}
+
+.button:hover {
+  border-color: rgba(0, 0, 0, 0.22);
+}
+
+.small {
+  font-size: 12px;
+  color: rgba(17, 24, 28, 0.58);
+  margin-top: 10px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Mobile dark palette (see `constants/Colors.ts`) */
+    --bg: #151718;
+    --text: #eceeed;
+    --muted: #9ba1a6;
+
+    --card: #1f2937;
+    --surface: #111827;
+    --border: #374151;
+    --divider: #374151;
+
+    --input-bg: #1f2937;
+    --input-border: #374151;
+    --placeholder: #6b7280;
+
+    --button-bg: #374151;
+    --button-border: #4b5563;
+    --button-pressed: #4b5563;
+
+    --shadow: rgba(0, 0, 0, 0.40);
+    --ring: rgba(249, 250, 251, 0.14);
+  }
+
+  .subtitle,
+  .card p,
+  .contentCard p,
+  .contentCard li,
+  .small {
+    color: rgba(236, 237, 238, 0.74);
+  }
+
+  .cta:hover,
+  .ctaSecondary:hover,
+  .pill:hover,
+  .button:hover {
+    border-color: rgba(255, 255, 255, 0.22);
+  }
+}
+
+@media (max-width: 720px) {
+  .title {
+    font-size: 36px;
+  }
+
+  .card {
+    grid-column: span 12;
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "app": {
+    "[project]/app/_not-found/page": [
+      "static/media/WorkSans_400Regular-s.p.ceba3c0b.ttf",
+      "static/media/WorkSans_600SemiBold-s.p.2daec8e6.ttf",
+      "static/media/WorkSans_700Bold-s.p.87e09b27.ttf"
+    ],
+    "[project]/app/page": [
+      "static/media/WorkSans_400Regular-s.p.ceba3c0b.ttf",
+      "static/media/WorkSans_600SemiBold-s.p.2daec8e6.ttf",
+      "static/media/WorkSans_700Bold-s.p.87e09b27.ttf"
+    ],
+    "[project]/app/privacy/page": [
+      "static/media/WorkSans_400Regular-s.p.ceba3c0b.ttf",
+      "static/media/WorkSans_600SemiBold-s.p.2daec8e6.ttf",
+      "static/media/WorkSans_700Bold-s.p.87e09b27.ttf"
+    ],
+    "[project]/app/support/page": [
+      "static/media/WorkSans_400Regular-s.p.ceba3c0b.ttf",
+      "static/media/WorkSans_600SemiBold-s.p.2daec8e6.ttf",
+      "static/media/WorkSans_700Bold-s.p.87e09b27.ttf"
+    ],
+    "[project]/app/terms/page": [
+      "static/media/WorkSans_400Regular-s.p.ceba3c0b.ttf",
+      "static/media/WorkSans_600SemiBold-s.p.2daec8e6.ttf",
+      "static/media/WorkSans_700Bold-s.p.87e09b27.ttf"
+    ]
+  },
+  "appUsingSizeAdjust": true,
+  "pages": {},
+  "pagesUsingSizeAdjust": false
+}

@@ -1,4 +1,8 @@
 {
+  "common": {
+    "close": "Закрити",
+    "lastUpdated": "Останнє оновлення"
+  },
   "app": {
     "title": "101 історія дзен",
     "continueReading": "Продовжити читання",
@@ -14,6 +18,13 @@
       "auto": "Авто",
       "light": "Світлий",
       "dark": "Темний"
+    },
+    "about": {
+      "title": "Про застосунок",
+      "privacy": "Політика конфіденційності",
+      "terms": "Умови користування",
+      "support": "Підтримка",
+      "missingLinks": "Додайте посилання Privacy/Terms/Support у app.json, щоб показати їх тут."
     }
   },
   "favorites": {

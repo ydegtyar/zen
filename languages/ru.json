@@ -1,4 +1,8 @@
 {
+  "common": {
+    "close": "Закрыть",
+    "lastUpdated": "Последнее обновление"
+  },
   "app": {
     "title": "101 история дзен",
     "continueReading": "Продолжить чтение",
@@ -14,6 +18,13 @@
       "auto": "Авто",
       "light": "Светлая",
       "dark": "Тёмная"
+    },
+    "about": {
+      "title": "О приложении",
+      "privacy": "Политика конфиденциальности",
+      "terms": "Условия использования",
+      "support": "Поддержка",
+      "missingLinks": "Добавьте ссылки Privacy/Terms/Support в app.json, чтобы показать их здесь."
     }
   },
   "favorites": {

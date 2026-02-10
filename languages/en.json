@@ -1,4 +1,8 @@
 {
+  "common": {
+    "close": "Close",
+    "lastUpdated": "Last updated"
+  },
   "app": {
     "title": "101 zen story",
     "continueReading": "Continue Reading",
@@ -14,6 +18,13 @@
       "auto": "Auto",
       "light": "Light",
       "dark": "Dark"
+    },
+    "about": {
+      "title": "About",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "support": "Support",
+      "missingLinks": "Add Privacy/Terms/Support links in app.json to show them here."
     }
   },
   "favorites": {

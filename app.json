@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Zen",
-    "slug": "zen",
+    "slug": "zen-101",
     "description": "A calm, focused reader for 101 Zen stories.",
     "version": "1.0.0",
     "scheme": "zen",
@@ -48,6 +48,10 @@
         "privacyPolicyUrl": "https://zen-101.vercel.app/privacy",
         "termsOfServiceUrl": "https://zen-101.vercel.app/terms",
         "supportUrl": "https://zen-101.vercel.app/support"
+      },
+      "router": {},
+      "eas": {
+        "projectId": "b48846e5-076a-4386-ad12-e36bc0486a81"
       }
     },
     "plugins": [
@@ -63,6 +67,7 @@
       "en": "./languages/en.json",
       "uk": "./languages/uk.json",
       "ru": "./languages/ru.json"
-    }
+    },
+    "owner": "zen-101"
   }
 }

@@ -1,8 +1,8 @@
 import { PropsWithChildren, useState } from 'react';
+import { Ionicons } from '@react-native-vector-icons/ionicons';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import { IconSymbol } from '@/components/ui/IconSymbol';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { lightHaptic } from '@/utils/haptics';
@@ -20,10 +20,9 @@ export function Collapsible({ children, title }: PropsWithChildren & { title: st
           setIsOpen((value) => !value);
         }}
         activeOpacity={0.8}>
-        <IconSymbol
-          name="chevron.right"
+        <Ionicons
+          name="chevron-forward"
           size={18}
-          weight="medium"
           color={theme === 'light' ? Colors.light.icon : Colors.dark.icon}
           style={{ transform: [{ rotate: isOpen ? '90deg' : '0deg' }] }}
         />

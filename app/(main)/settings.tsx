@@ -1,9 +1,11 @@
 import type React from 'react';
 import { Header } from '@/components/Header';
+import { getAppButtonStyle, useAppButtonPalette } from '@/components/ui/buttonStyles';
 import { i18n } from '@/data/i18n';
 import { Language, setLanguage, useLanguage } from '@/data/language';
+import { resetReadingProgress } from '@/data/reading-progress';
 import { setTheme, Theme, useAppTheme } from '@/data/theme';
-import { ArrowLeft, Contrast, Moon, Sun } from '@tamagui/lucide-icons';
+import { ArrowLeft, Contrast, Moon, RefreshCcw, Sun } from '@tamagui/lucide-icons-2';
 import { Link } from 'expo-router';
 import { Adapt, Button, Dialog, H4, H5, ScrollView, Separator, Sheet, Text, XStack, YStack } from 'tamagui';
 import { lightHaptic } from '@/utils/haptics';
@@ -126,7 +128,7 @@ function PolicyDialog({
       </Dialog.Trigger>
 
       <Adapt when="sm" platform="touch">
-        <Sheet modal dismissOnSnapToBottom snapPoints={[85]} animation="quick">
+        <Sheet modal dismissOnSnapToBottom snapPoints={[85]}>
           <Sheet.Overlay />
           <Sheet.Frame padding="$4" gap="$3" backgroundColor="$background">
             <Sheet.Handle />
@@ -167,6 +169,7 @@ export default function SettingsScreen() {
   const { data: language } = useLanguage();
   const { data: theme } = useAppTheme();
   const links = getAppLinks();
+  const buttonPalette = useAppButtonPalette();
   
   return (
     <YStack flex={1} backgroundColor="$background">
@@ -175,13 +178,15 @@ export default function SettingsScreen() {
           <Link href={{ pathname: '/' }} asChild>
             <Button
               size="$3"
-              chromeless
+              circular
+              borderWidth={1}
+              {...getAppButtonStyle(buttonPalette)}
               aria-label="Back"
               onPressIn={() => {
                 void lightHaptic();
               }}
             >
-              <ArrowLeft />
+              <ArrowLeft size={20} color={buttonPalette.foreground} />
             </Button>
           </Link>
         }
@@ -191,76 +196,113 @@ export default function SettingsScreen() {
       <YStack padding="$4" gap="$4" flex={1}>
         <H5>{i18n.t('settings.language')}</H5>
         <YStack gap="$2">
-          {LANGUAGES.map(lang => (
-            <Button
-              key={lang.code}
-              size="$4"
-              borderWidth={1}
-              themeInverse={language === lang.code}
-              onPressIn={() => {
-                void lightHaptic();
-              }}
-              onPress={() => setLanguage(lang.code as Language)}
-            >
-              {lang.label}
-            </Button>
-          ))}
+          {LANGUAGES.map(lang => {
+            const isSelected = language === lang.code;
+
+            return (
+              <Button
+                key={lang.code}
+                size="$4"
+                borderWidth={1}
+                {...getAppButtonStyle(buttonPalette, isSelected)}
+                onPressIn={() => {
+                  void lightHaptic();
+                }}
+                onPress={() => setLanguage(lang.code as Language)}
+              >
+                <Text color={buttonPalette.foreground} fontWeight={isSelected ? '600' : '400'}>
+                  {lang.label}
+                </Text>
+              </Button>
+            );
+          })}
         </YStack>
 
         <H5 marginTop="$4">{i18n.t('settings.theme.title')}</H5>
-        <XStack gap="$2" flexWrap="wrap" flex={1} width="100%">
-          {THEMES.map(item => (
+        <XStack gap="$2" flexWrap="wrap" width="100%">
+          {THEMES.map(item => {
+            const isSelected = theme === item.value;
+            const contentColor = buttonPalette.foreground;
+
+            return (
+              <Button
+                key={item.title}
+                size="$4"
+                borderWidth={1}
+                {...getAppButtonStyle(buttonPalette, isSelected)}
+                onPressIn={() => {
+                  void lightHaptic();
+                }}
+                onPress={() => setTheme(item.value)}
+                flex={1}
+              >
+                <YStack flexDirection="row" alignItems="center" gap="$2">
+                  <item.icon size={20} color={contentColor} />
+                  <Text color={contentColor}>
+                    {i18n.t(`settings.theme.${item.title.toLowerCase()}`)}
+                  </Text>
+                </YStack>
+              </Button>
+            );
+          })}
+        </XStack>
+
+        {__DEV__ ? (
+          <>
+            <Separator marginTop="$2" />
             <Button
-              key={item.title}
               size="$4"
-              themeInverse={theme === item.value}
               borderWidth={1}
+              {...getAppButtonStyle(buttonPalette)}
               onPressIn={() => {
                 void lightHaptic();
               }}
-              onPress={() => setTheme(item.value)}
-              flex={1}
+              onPress={() => {
+                void resetReadingProgress();
+              }}
             >
-              <YStack flexDirection="row" alignItems="center" gap="$2">
-                <item.icon size={20} />
-                <Text>{i18n.t(`settings.theme.${item.title.toLowerCase()}`)}</Text>
-              </YStack>
+              <XStack alignItems="center" gap="$2">
+                <RefreshCcw size={20} color={buttonPalette.foreground} />
+                <Text color={buttonPalette.foreground}>{i18n.t('settings.resetAlreadyRead')}</Text>
+              </XStack>
             </Button>
-          ))}
-        </XStack>
+          </>
+        ) : null}
 
-        <Separator marginTop="$2" />
-        <YStack gap="$2" marginTop="$2">
-          {links.privacyPolicyUrl.length > 0 ? (
-            <PolicyDialog
-              triggerLabel={i18n.t('settings.about.privacy')}
-              title={i18n.t('settings.about.privacy')}
-              sections={PRIVACY_SECTIONS}
-              lastUpdated={POLICY_LAST_UPDATED}
-            />
-          ) : null}
-          {links.termsOfServiceUrl.length > 0 ? (
-            <PolicyDialog
-              triggerLabel={i18n.t('settings.about.terms')}
-              title={i18n.t('settings.about.terms')}
-              sections={TERMS_SECTIONS}
-              lastUpdated={POLICY_LAST_UPDATED}
-            />
-          ) : null}
-          {links.supportUrl.length > 0 ? (
-            <LinkButton
-              onPressIn={() => void lightHaptic()}
-              onPress={() => void openExternalUrl(links.supportUrl)}
-            >
-              {i18n.t('settings.about.support')}
-            </LinkButton>
-          ) : null}
+        <YStack gap="$2" marginTop="auto">
+          <Separator />
+          <YStack gap="$2" marginTop="$2">
+            {links.privacyPolicyUrl.length > 0 ? (
+              <PolicyDialog
+                triggerLabel={i18n.t('settings.about.privacy')}
+                title={i18n.t('settings.about.privacy')}
+                sections={PRIVACY_SECTIONS}
+                lastUpdated={POLICY_LAST_UPDATED}
+              />
+            ) : null}
+            {links.termsOfServiceUrl.length > 0 ? (
+              <PolicyDialog
+                triggerLabel={i18n.t('settings.about.terms')}
+                title={i18n.t('settings.about.terms')}
+                sections={TERMS_SECTIONS}
+                lastUpdated={POLICY_LAST_UPDATED}
+              />
+            ) : null}
+            {links.supportUrl.length > 0 ? (
+              <LinkButton
+                onPressIn={() => void lightHaptic()}
+                onPress={() => void openExternalUrl(links.supportUrl)}
+              >
+                {i18n.t('settings.about.support')}
+              </LinkButton>
+            ) : null}
 
-          {links.privacyPolicyUrl.length === 0 &&
-          links.termsOfServiceUrl.length === 0 &&
-          links.supportUrl.length === 0 ? (
-            <Text opacity={0.7}>{i18n.t('settings.about.missingLinks')}</Text>
-          ) : null}
+            {links.privacyPolicyUrl.length === 0 &&
+            links.termsOfServiceUrl.length === 0 &&
+            links.supportUrl.length === 0 ? (
+              <Text opacity={0.7}>{i18n.t('settings.about.missingLinks')}</Text>
+            ) : null}
+          </YStack>
         </YStack>
       </YStack>
     </YStack>

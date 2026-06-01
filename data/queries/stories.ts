@@ -4,14 +4,27 @@ import { fetchStories } from '../fetch-stories';
 import { Language, useLanguage } from '../language';
 import { Story } from "../Story";
 
-export function useStories(
-  options?: { select?: QueryObserverOptions<Story[]>['select'], enabled?: boolean }
+type StoriesData = {
+  stories: Story[];
+  storiesByIndex: Map<number, Story>;
+};
+
+const buildStoriesData = async (language: Language): Promise<StoriesData> => {
+  const stories = await fetchStories(language);
+  return {
+    stories,
+    storiesByIndex: new Map(stories.map((story) => [story.index, story])),
+  };
+};
+
+function useStoriesData<TData = StoriesData>(
+  options?: { enabled?: boolean, select?: (data: StoriesData) => TData }
 ) {
   const { data: language, isLoading } = useLanguage();
 
   return useQuery({
-    queryKey: ['stories', language],
-    queryFn: () => fetchStories(language || Language.En),
+    queryKey: ['stories-data', language],
+    queryFn: () => buildStoriesData(language || Language.En),
     staleTime: Infinity,
     gcTime: Infinity,
     refetchOnWindowFocus: false,
@@ -24,10 +37,29 @@ export function useStories(
   });
 }
 
-export function useStory(index: number, options?: { enabled?: boolean }) {
-  const query = useStories({
-    select: (stories) => stories?.filter((s) => s.index === index),
-    enabled: options?.enabled ?? index >= 0,
+export function useStories(
+  options?: { select?: QueryObserverOptions<Story[]>['select'], enabled?: boolean }
+) {
+  return useStoriesData({
+    enabled: options?.enabled,
+    select: (data) => {
+      const stories = data.stories;
+      return options?.select ? options.select(stories) : stories;
+    },
   });
-  return { ...query, data: query.data?.[0] };
+}
+
+export function useStory(index: number, options?: { enabled?: boolean }) {
+  const query = useStoriesData({
+    enabled: options?.enabled ?? index >= 0,
+    select: (data) => data.storiesByIndex.get(index),
+  });
+  return query;
+}
+
+export function useStoriesByIndex(options?: { enabled?: boolean }) {
+  return useStoriesData({
+    enabled: options?.enabled,
+    select: (data) => data.storiesByIndex,
+  });
 }

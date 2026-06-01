@@ -1,6 +1,6 @@
 import { queryClient } from '@/data/query-client';
 import { i18n } from '@/data/i18n';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getPersistentItem, setPersistentItem } from '@/data/persistent-storage';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 
@@ -18,18 +18,23 @@ export const useLanguage = () => {
   const query = useQuery({
     queryKey: LANGUAGE_KEY,
     queryFn: async (): Promise<Language> => {
-      const lang = await AsyncStorage.getItem(STORAGE_KEY);
+      const lang = await getPersistentItem(STORAGE_KEY);
       if (lang && AVAILABLE_LANGUAGES.includes(lang as Language)) {
         return lang as Language;
       }
       return Language.En;
     },
-
+    staleTime: Infinity,
+    gcTime: Infinity,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+    refetchInterval: false,
+    refetchIntervalInBackground: false,
   });
 
   useEffect(() => {
     if (query.data) {
-      AsyncStorage.setItem(STORAGE_KEY, query.data);
       i18n.locale = query.data;
     }
   }, [query.data]);
@@ -38,7 +43,11 @@ export const useLanguage = () => {
 };
 
 export const setLanguage = (lang: Language) => {
+  if (queryClient.getQueryData(LANGUAGE_KEY) === lang) {
+    return;
+  }
+
   i18n.locale = lang;
   queryClient.setQueryData(LANGUAGE_KEY, lang);
-  AsyncStorage.setItem(STORAGE_KEY, lang);
+  setPersistentItem(STORAGE_KEY, lang);
 };

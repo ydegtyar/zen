@@ -6,14 +6,29 @@
   "build": {
     "development": {
       "developmentClient": true,
-      "distribution": "internal"
+      "distribution": "internal",
+      "env": {
+        "EXPO_PUBLIC_PRIVACY_POLICY_URL": "https://zen-101.vercel.app/privacy",
+        "EXPO_PUBLIC_TERMS_OF_SERVICE_URL": "https://zen-101.vercel.app/terms",
+        "EXPO_PUBLIC_SUPPORT_URL": "https://zen-101.vercel.app/support"
+      }
     },
     "preview": {
-      "distribution": "internal"
+      "distribution": "internal",
+      "env": {
+        "EXPO_PUBLIC_PRIVACY_POLICY_URL": "https://zen-101.vercel.app/privacy",
+        "EXPO_PUBLIC_TERMS_OF_SERVICE_URL": "https://zen-101.vercel.app/terms",
+        "EXPO_PUBLIC_SUPPORT_URL": "https://zen-101.vercel.app/support"
+      }
     },
     "production": {
       "distribution": "store",
-      "autoIncrement": true
+      "autoIncrement": true,
+      "env": {
+        "EXPO_PUBLIC_PRIVACY_POLICY_URL": "https://zen-101.vercel.app/privacy",
+        "EXPO_PUBLIC_TERMS_OF_SERVICE_URL": "https://zen-101.vercel.app/terms",
+        "EXPO_PUBLIC_SUPPORT_URL": "https://zen-101.vercel.app/support"
+      }
     }
   },
   "submit": {

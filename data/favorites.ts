@@ -1,4 +1,4 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getPersistentItem, setPersistentItem } from '@/data/persistent-storage';
 import { useQuery } from '@tanstack/react-query';
 import { uniq } from 'lodash';
 import { queryClient } from '@/data/query-client';
@@ -7,12 +7,12 @@ const FAVORITES_KEY = 'favorites';
 const FAVORITES_QUERY_KEY = ['favorites'];
 
 export async function getFavorites(): Promise<number[]> {
-    const data = await AsyncStorage.getItem(FAVORITES_KEY);
+    const data = await getPersistentItem(FAVORITES_KEY);
     return data ? JSON.parse(data) : [];
 }
 
 export async function setFavorites(favorites: number[]) {
-    await AsyncStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
+    await setPersistentItem(FAVORITES_KEY, JSON.stringify(favorites));
 }
 
 const flushFavoritesToStorage = () => {

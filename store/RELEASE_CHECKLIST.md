@@ -1,4 +1,4 @@
-# Release checklist (iOS + Android)
+# Release checklist (iOS + Android + Web)
 
 This project is an Expo app. Recommended path: **EAS Build + EAS Submit**.
 
@@ -40,3 +40,9 @@ This project is an Expo app. Recommended path: **EAS Build + EAS Submit**.
 - Submit:
   - Android: `npm run submit:android`
   - iOS: `npm run submit:ios`
+
+## Web app publish
+
+- Build the web app from the React Native codebase: `npm run web:build`
+- Preview the exported app before uploading: `npm run web:preview`
+- Upload the generated `dist/` directory to your static web host.

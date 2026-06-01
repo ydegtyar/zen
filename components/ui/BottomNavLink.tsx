@@ -1,20 +1,22 @@
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons } from '@react-native-vector-icons/ionicons';
 import { Href, Link } from 'expo-router';
-import { Button, Text, useTheme, XStack } from 'tamagui';
+import { Button, Text, XStack } from 'tamagui';
 import { lightHaptic } from '@/utils/haptics';
+import { getAppButtonStyle, useAppButtonPalette } from '@/components/ui/buttonStyles';
 
 type Props = {
   href: Href;
   title: string;
   direction: 'prev' | 'next';
+  replace?: boolean;
 };
 
-export function BottomNavLink({ href, title, direction }: Props) {
-  const { color } = useTheme();
+export function BottomNavLink({ href, title, direction, replace = false }: Props) {
+  const buttonPalette = useAppButtonPalette();
   const isPrev = direction === 'prev';
 
   return (
-    <Link href={href} asChild>
+    <Link href={href} asChild replace={replace}>
       <Button
         unstyled
         flex={1}
@@ -22,11 +24,9 @@ export function BottomNavLink({ href, title, direction }: Props) {
         borderWidth={1}
         paddingVertical="$3"
         paddingHorizontal="$3"
-        backgroundColor="$gray4"
-        borderColor="$gray2"
+        {...getAppButtonStyle(buttonPalette)}
         justifyContent={isPrev ? 'flex-start' : 'flex-end'}
         alignItems="center"
-        pressStyle={{ backgroundColor: '$gray2', opacity: 0.9, scale: 0.98 }}
         onPressIn={() => {
           void lightHaptic();
         }}
@@ -38,9 +38,9 @@ export function BottomNavLink({ href, title, direction }: Props) {
           flex={1}
           justifyContent={isPrev ? 'flex-start' : 'flex-end'}
         >
-          {isPrev && <Ionicons name="chevron-back" size={20} color={color.val} />}
+          {isPrev && <Ionicons name="chevron-back" size={20} color={buttonPalette.foreground} />}
           <Text
-            color="$color"
+            color={buttonPalette.foreground}
             numberOfLines={2}
             flex={1}
             textAlign={isPrev ? 'left' : 'right'}
@@ -48,7 +48,7 @@ export function BottomNavLink({ href, title, direction }: Props) {
           >
             {title}
           </Text>
-          {!isPrev && <Ionicons name="chevron-forward" size={20} color={color.val} />}
+          {!isPrev && <Ionicons name="chevron-forward" size={20} color={buttonPalette.foreground} />}
         </XStack>
       </Button>
     </Link>

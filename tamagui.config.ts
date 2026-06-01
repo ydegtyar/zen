@@ -1,3 +1,4 @@
+import { animations } from '@tamagui/config'
 import { shorthands } from '@tamagui/shorthands'
 import { tokens as baseTokens } from '@tamagui/themes'
 import { createTamagui } from 'tamagui'
@@ -7,6 +8,7 @@ const config = createTamagui({
   defaultTheme: 'light',
   shouldAddPrefersColorThemes: false,
   themeClassNameOnRoot: false,
+  animations,
   shorthands,
   fonts: {
     heading: {
@@ -116,4 +118,4 @@ declare module 'tamagui' {
   interface TamaguiCustomConfig extends AppConfig {}
 }
 
-export default config 
+export default config

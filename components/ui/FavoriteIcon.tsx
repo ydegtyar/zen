@@ -1,7 +1,7 @@
-import { Colors } from '@/constants/Colors';
-import { Ionicons } from '@expo/vector-icons';
+import { APP_BUTTON_PALETTE } from '@/components/ui/buttonStyles';
+import { useAppColorScheme } from '@/data/theme';
+import { Ionicons } from '@react-native-vector-icons/ionicons';
 import { useEffect } from 'react';
-import { useColorScheme } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
 
 interface FavoriteIconProps {
@@ -11,8 +11,8 @@ interface FavoriteIconProps {
 }
 
 export function FavoriteIcon({ filled = false, size = 24, color }: FavoriteIconProps) {
-  const scheme = useColorScheme() ?? 'light';
-  const iconColor = color || Colors[scheme].tint;
+  const colorScheme = useAppColorScheme();
+  const iconColor = color || APP_BUTTON_PALETTE[colorScheme].foreground;
   const scale = useSharedValue(1);
   const opacity = useSharedValue(filled ? 1 : 0.7);
 
@@ -22,7 +22,7 @@ export function FavoriteIcon({ filled = false, size = 24, color }: FavoriteIconP
     setTimeout(() => {
       scale.value = withSpring(1, { damping: 6, stiffness: 120 });
     }, 150);
-  }, [filled]);
+  }, [filled, opacity, scale]);
 
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ scale: scale.value }],
@@ -34,4 +34,4 @@ export function FavoriteIcon({ filled = false, size = 24, color }: FavoriteIconP
       <Ionicons name={filled ? 'heart' : 'heart-outline'} size={size} color={iconColor} />
     </Animated.View>
   );
-} 
+}

@@ -1,6 +1,8 @@
 import { useProgressPercent } from '@/data/reading-progress';
 import { View, YStack } from 'tamagui';
 
+const MAIN_SCREEN_HORIZONTAL_PADDING = 16;
+
 export function ReadingProgressIndicator() {
   const percent = useProgressPercent();
   return (
@@ -8,7 +10,7 @@ export function ReadingProgressIndicator() {
       backgroundColor="$background"
       borderTopLeftRadius={12}
       borderTopRightRadius={12}
-      paddingHorizontal="$3"
+      paddingHorizontal={MAIN_SCREEN_HORIZONTAL_PADDING}
       paddingVertical="$2"
     >
       <View

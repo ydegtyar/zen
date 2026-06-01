@@ -13,8 +13,6 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import 'react-native-reanimated';
-import { TamaguiProvider } from 'tamagui';
-import config from '../tamagui.config';
 
 SplashScreen.preventAutoHideAsync();
 

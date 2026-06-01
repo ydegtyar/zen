@@ -18,6 +18,11 @@ A calm, focused reader for 101 Zen stories. Browse the full collection, search b
 1. Install dependencies: `npm install`
 2. Start the app: `npx expo start`
 
+**Publish Web App**
+- Build the React Native app for web: `npm run web:build`
+- Preview the exported site locally: `npm run web:preview`
+- Deploy the generated `dist/` directory to any static host, such as Vercel, Netlify, Cloudflare Pages, S3, or GitHub Pages.
+
 **Publish (iOS + Android)**
 - Fill in app identifiers + legal links in `app.json`, then validate: `npm run release:check`
 - Install EAS CLI if needed: `npm i -g eas-cli`

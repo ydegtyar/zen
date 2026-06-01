@@ -1,7 +1,8 @@
 import { queryClient } from '@/data/query-client';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getPersistentItem, setPersistentItem } from '@/data/persistent-storage';
+import { useColorScheme } from '@/hooks/useColorScheme';
 import { useQuery } from '@tanstack/react-query';
-import { useColorScheme } from 'react-native';
+import { Platform } from 'react-native';
 
 export enum Theme {
   Auto = 'auto',
@@ -12,18 +13,19 @@ export enum Theme {
 
 const THEME_KEY = ['theme'];
 export const STORAGE_KEY = 'app_theme';
+const DEFAULT_THEME = Platform.OS === 'web' ? Theme.Light : Theme.Auto;
 
 export const useAppTheme = () => {
   const query = useQuery({
     queryKey: THEME_KEY,
     queryFn: async (): Promise<Theme> => {
-      const savedTheme = await AsyncStorage.getItem(STORAGE_KEY);
+      const savedTheme = await getPersistentItem(STORAGE_KEY);
       if (savedTheme && [Theme.Light, Theme.Dark, Theme.Auto].includes(savedTheme as Theme)) {
         return savedTheme as Theme;
       }
-      return Theme.Auto;
+      return DEFAULT_THEME;
     },
-    initialData: Theme.Auto,
+    initialData: DEFAULT_THEME,
     staleTime: Infinity,
     refetchOnWindowFocus: false,
     refetchOnMount: false,
@@ -36,8 +38,12 @@ export const useAppTheme = () => {
 };
 
 export const setTheme = (theme: Theme) => {
+  if (queryClient.getQueryData(THEME_KEY) === theme) {
+    return;
+  }
+
   queryClient.setQueryData(THEME_KEY, theme);
-  AsyncStorage.setItem(STORAGE_KEY, theme);
+  setPersistentItem(STORAGE_KEY, theme);
 }; 
 
 export const useAppColorScheme = (): 'light' | 'dark' => {
@@ -45,7 +51,7 @@ export const useAppColorScheme = (): 'light' | 'dark' => {
   const systemTheme = useColorScheme();
 
   if (!theme || theme === Theme.Auto) {
-    return systemTheme ?? 'dark';
+    return systemTheme === 'light' || systemTheme === 'dark' ? systemTheme : 'dark';
   }
   
   return theme as 'light' | 'dark';

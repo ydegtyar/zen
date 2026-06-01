@@ -41,12 +41,12 @@ export function EmptyFavorites() {
   }, []);
 
   const startRipples = useCallback(() => {
-    ripple1.value = 0;
-    ripple2.value = 0;
-    ripple3.value = 0;
-    ripple1.value = withTiming(1, { duration: 900, easing: Easing.out(Easing.quad) });
-    ripple2.value = withDelay(120, withTiming(1, { duration: 900, easing: Easing.out(Easing.quad) }));
-    ripple3.value = withDelay(240, withTiming(1, { duration: 900, easing: Easing.out(Easing.quad) }));
+    ripple1.set(0);
+    ripple2.set(0);
+    ripple3.set(0);
+    ripple1.set(withTiming(1, { duration: 900, easing: Easing.out(Easing.quad) }));
+    ripple2.set(withDelay(120, withTiming(1, { duration: 900, easing: Easing.out(Easing.quad) })));
+    ripple3.set(withDelay(240, withTiming(1, { duration: 900, easing: Easing.out(Easing.quad) })));
   }, [ripple1, ripple2, ripple3]);
 
   const handlePress = useCallback(() => {

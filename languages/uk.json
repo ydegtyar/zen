@@ -13,6 +13,7 @@
   "settings": {
     "title": "Налаштування",
     "language": "Мова",
+    "resetAlreadyRead": "Скинути прочитане",
     "theme": {
       "title": "Тема",
       "auto": "Авто",

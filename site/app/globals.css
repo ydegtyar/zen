@@ -59,8 +59,16 @@ body {
 
 body {
   position: relative;
+  font-family: "Work Sans", Arial, Helvetica, sans-serif;
   font-size: var(--text-base);
   line-height: 1.5;
+}
+
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
 }
 
 a {

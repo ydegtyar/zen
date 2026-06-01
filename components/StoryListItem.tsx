@@ -2,7 +2,7 @@ import { Story } from "@/data/Story";
 import { Image } from 'expo-image';
 import { Link } from 'expo-router';
 import React, { memo, useMemo } from 'react';
-import { TouchableHighlight } from 'react-native';
+import { Platform, TouchableHighlight } from 'react-native';
 import { Text, XStack, YStack, useTheme } from 'tamagui';
 import { lightHaptic } from '@/utils/haptics';
 
@@ -12,6 +12,14 @@ interface Props {
 }
 
 const PLACEHOLDER_IMAGE = require('@/assets/images/placeholder.png');
+const TITLE_FONT_FAMILY = Platform.select({
+  web: 'WorkSans_700Bold, sans-serif',
+  default: 'WorkSans_700Bold',
+});
+const BODY_FONT_FAMILY = Platform.select({
+  web: 'WorkSans_400Regular, sans-serif',
+  default: 'WorkSans_400Regular',
+});
 
 function StoryListItemComponent({ story, isRead }: Props) {
   const theme = useTheme();
@@ -44,8 +52,12 @@ function StoryListItemComponent({ story, isRead }: Props) {
             recyclingKey={String(story.index)}
           />
           <YStack flex={1}>
-            <Text fontWeight="bold" fontSize="$4" numberOfLines={1}>{story.title}</Text>
-            <Text fontSize="$3" color="$color" numberOfLines={1}>{story.text}</Text>
+            <Text fontFamily={TITLE_FONT_FAMILY} fontWeight="bold" fontSize="$4" numberOfLines={1}>
+              {story.title}
+            </Text>
+            <Text fontFamily={BODY_FONT_FAMILY} fontSize="$3" color="$color" numberOfLines={1}>
+              {story.text}
+            </Text>
           </YStack>
         </XStack>
       </TouchableHighlight>

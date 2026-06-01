@@ -5,6 +5,7 @@ import React, { memo, useMemo } from 'react';
 import { Platform, TouchableHighlight } from 'react-native';
 import { Text, XStack, YStack, useTheme } from 'tamagui';
 import { lightHaptic } from '@/utils/haptics';
+import { useLocaleHeadingFontFamily } from '@/utils/locale-fonts';
 
 interface Props {
   story: Story;
@@ -12,10 +13,6 @@ interface Props {
 }
 
 const PLACEHOLDER_IMAGE = require('@/assets/images/placeholder.png');
-const TITLE_FONT_FAMILY = Platform.select({
-  web: 'WorkSans_700Bold, sans-serif',
-  default: 'WorkSans_700Bold',
-});
 const BODY_FONT_FAMILY = Platform.select({
   web: 'WorkSans_400Regular, sans-serif',
   default: 'WorkSans_400Regular',
@@ -25,6 +22,7 @@ function StoryListItemComponent({ story, isRead }: Props) {
   const theme = useTheme();
   const backgroundColor = theme.background?.val ?? 'transparent';
   const readBackgroundColor = theme.gray3?.val ?? backgroundColor;
+  const titleFontFamily = useLocaleHeadingFontFamily();
   const href = useMemo(
     () => ({ pathname: '/stories/[id]' as const, params: { id: String(story.index) } }),
     [story.index]
@@ -52,7 +50,7 @@ function StoryListItemComponent({ story, isRead }: Props) {
             recyclingKey={String(story.index)}
           />
           <YStack flex={1}>
-            <Text fontFamily={TITLE_FONT_FAMILY} fontWeight="bold" fontSize="$4" numberOfLines={1}>
+            <Text fontFamily={titleFontFamily} fontWeight="bold" fontSize="$4" numberOfLines={1}>
               {story.title}
             </Text>
             <Text fontFamily={BODY_FONT_FAMILY} fontSize="$3" color="$color" numberOfLines={1}>

@@ -12,6 +12,7 @@ import { Adapt, Button, Dialog, H4, H5, ScrollView, Separator, Sheet, Text, XSta
 import { lightHaptic } from '@/utils/haptics';
 import { getAppLinks } from '@/constants/appLinks';
 import { openExternalUrl } from '@/utils/openExternalUrl';
+import { useLocaleHeadingFontFamily } from '@/utils/locale-fonts';
 import { useAppObserve } from '@/utils/observe';
 
 const LANGUAGES = [
@@ -86,6 +87,8 @@ function LinkButton({ children, ...props }: React.ComponentProps<typeof Button>)
 }
 
 function PolicyContent({ title, lastUpdated, sections }: { title: string; lastUpdated: string; sections: PolicySection[] }) {
+  const headingFontFamily = useLocaleHeadingFontFamily();
+
   return (
     <YStack gap="$3">
       <Dialog.Title>{title}</Dialog.Title>
@@ -95,7 +98,7 @@ function PolicyContent({ title, lastUpdated, sections }: { title: string; lastUp
       <YStack gap="$3">
         {sections.map(section => (
           <YStack key={section.heading} gap="$1">
-            <H5>{section.heading}</H5>
+            <H5 style={{ fontFamily: headingFontFamily }}>{section.heading}</H5>
             {Array.isArray(section.body) ? (
               section.body.map((line, index) => (
                 <Text key={line + index} lineHeight={20}>
@@ -173,6 +176,7 @@ export default function SettingsScreen() {
   const { data: theme } = useAppTheme();
   const links = getAppLinks();
   const buttonPalette = useAppButtonPalette();
+  const headingFontFamily = useLocaleHeadingFontFamily();
 
   useEffect(() => {
     markInteractive();
@@ -197,11 +201,11 @@ export default function SettingsScreen() {
             </Button>
           </Link>
         }
-        middleSlot={<H4>{i18n.t('settings.title')}</H4>}
+        middleSlot={<H4 style={{ fontFamily: headingFontFamily }}>{i18n.t('settings.title')}</H4>}
         endSlot={null}
       />
       <YStack padding="$4" gap="$4" flex={1}>
-        <H5>{i18n.t('settings.language')}</H5>
+        <H5 style={{ fontFamily: headingFontFamily }}>{i18n.t('settings.language')}</H5>
         <YStack gap="$2">
           {LANGUAGES.map(lang => {
             const isSelected = language === lang.code;
@@ -225,7 +229,7 @@ export default function SettingsScreen() {
           })}
         </YStack>
 
-        <H5 marginTop="$4">{i18n.t('settings.theme.title')}</H5>
+        <H5 style={{ fontFamily: headingFontFamily }} marginTop="$4">{i18n.t('settings.theme.title')}</H5>
         <XStack gap="$2" flexWrap="wrap" width="100%">
           {THEMES.map(item => {
             const isSelected = theme === item.value;

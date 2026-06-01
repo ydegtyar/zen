@@ -24,6 +24,7 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Button, H4, Input, Spinner, XStack, YStack } from 'tamagui';
 import { lightHaptic } from '@/utils/haptics';
 import { useAppColorScheme } from '@/data/theme';
+import { useLocaleHeadingFontFamily } from '@/utils/locale-fonts';
 import { useAppObserve } from '@/utils/observe';
 
 const PAGE_HORIZONTAL_PADDING = 16;
@@ -60,6 +61,7 @@ export default function MainScreen() {
   const buttonPalette = useAppButtonPalette();
   const searchBarPalette = SEARCH_BAR_PALETTE[colorScheme];
   const { data: language = Language.En } = useLanguage();
+  const headingFontFamily = useLocaleHeadingFontFamily();
   const { data: readIndexes = [] } = useReadingProgress();
   const favoriteSet = useMemo(() => new Set(favorites), [favorites]);
   const readIndexSet = useMemo(() => new Set(readIndexes), [readIndexes]);
@@ -157,7 +159,7 @@ export default function MainScreen() {
             }}
             onPress={handleRandomStoryPress}
           >
-            <H4>{i18n.t('app.title')}</H4>
+            <H4 style={{ fontFamily: headingFontFamily }}>{i18n.t('app.title')}</H4>
           </TouchableOpacity>
         }
         endSlot={

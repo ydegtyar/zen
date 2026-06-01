@@ -9,6 +9,7 @@ import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
 import { Text, XStack, YStack, useTheme } from 'tamagui';
 import { lightHaptic } from '@/utils/haptics';
+import { useLocaleHeadingFontFamily } from '@/utils/locale-fonts';
 
 interface Props {
   story: Story;
@@ -21,6 +22,7 @@ function ContinueReadingComponent({ story }: Props) {
   const theme = useTheme();
   const { width } = useWindowDimensions();
   const clearLastRead = useLastReadStore(state => state.clearLastRead);
+  const headingFontFamily = useLocaleHeadingFontFamily();
   const translateX = useSharedValue(0);
   const backgroundColor = theme.background?.val ?? 'transparent';
   const dismissBackgroundColor = theme.gray3?.val ?? backgroundColor;
@@ -100,7 +102,7 @@ function ContinueReadingComponent({ story }: Props) {
               <XStack paddingHorizontal="$1" paddingVertical="$2" alignItems="flex-start" gap="$3" >
                 <YStack flex={1}>
                   <Text fontSize="$3" color="$gray9" marginBottom={2}>{i18n.t('app.continueReading')}</Text>
-                  <Text fontWeight="bold" fontSize="$4" marginTop={'$1'} numberOfLines={2}>{story.title}</Text>
+                  <Text fontFamily={headingFontFamily} fontWeight="bold" fontSize="$4" marginTop={'$1'} numberOfLines={2}>{story.title}</Text>
                   <Text fontSize="$3" color="$color" numberOfLines={2} marginTop={2}>{story.text}</Text>
                 </YStack>
                 <Image

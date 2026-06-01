@@ -3,6 +3,7 @@ import { Href, Link } from 'expo-router';
 import { Button, Text, XStack } from 'tamagui';
 import { lightHaptic } from '@/utils/haptics';
 import { getAppButtonStyle, useAppButtonPalette } from '@/components/ui/buttonStyles';
+import { useLocaleHeadingFontFamily } from '@/utils/locale-fonts';
 
 type Props = {
   href: Href;
@@ -13,6 +14,7 @@ type Props = {
 
 export function BottomNavLink({ href, title, direction, replace = false }: Props) {
   const buttonPalette = useAppButtonPalette();
+  const headingFontFamily = useLocaleHeadingFontFamily();
   const isPrev = direction === 'prev';
 
   return (
@@ -44,6 +46,7 @@ export function BottomNavLink({ href, title, direction, replace = false }: Props
             numberOfLines={2}
             flex={1}
             textAlign={isPrev ? 'left' : 'right'}
+            fontFamily={headingFontFamily}
             fontWeight="600"
           >
             {title}

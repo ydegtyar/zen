@@ -6,12 +6,14 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import Animated, { Easing, useAnimatedProps, useSharedValue, withDelay, withTiming } from 'react-native-reanimated';
 import { useStories } from '@/data/queries/stories';
 import { useRouter } from 'expo-router';
+import { useLocaleHeadingFontFamily } from '@/utils/locale-fonts';
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
 export function EmptyFavorites() {
   const router = useRouter();
   const { data: stories = [] } = useStories();
+  const headingFontFamily = useLocaleHeadingFontFamily();
   const [isAnimating, setIsAnimating] = useState(false);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -76,7 +78,7 @@ export function EmptyFavorites() {
           <Circle cx="64" cy="64" r="10" fill="#A8B0A2" />
         </Svg>
       </Pressable>
-      <H5 textAlign="center">
+      <H5 style={{ fontFamily: headingFontFamily }} textAlign="center">
         {i18n.t('favorites.empty.title')}
       </H5>
       <Text fontSize="$4" color="$color" textAlign="center" padding="$2" lineHeight="$5">

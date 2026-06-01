@@ -6,6 +6,7 @@ import {
   WorkSans_600SemiBold,
   WorkSans_700Bold,
 } from '@expo-google-fonts/work-sans';
+import { OpenSans_700Bold } from '@expo-google-fonts/open-sans';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
@@ -27,6 +28,7 @@ function RootLayout() {
     WorkSans_500Medium,
     WorkSans_600SemiBold,
     WorkSans_700Bold,
+    OpenSans_700Bold,
   });
   const { markInteractive } = useAppObserve();
 

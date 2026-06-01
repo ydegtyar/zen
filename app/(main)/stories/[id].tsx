@@ -13,6 +13,7 @@ import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import { InteractionManager, LayoutChangeEvent, NativeScrollEvent, NativeSyntheticEvent, ScrollView, useWindowDimensions, View } from 'react-native';
 import { Button, H6, Spinner, Text, XStack, YStack } from 'tamagui';
 import { lightHaptic } from '@/utils/haptics';
+import { useLocaleHeadingFontFamily } from '@/utils/locale-fonts';
 import { useAppObserve } from '@/utils/observe';
 
 const CONTINUE_READING_SET_DELAY_MS = 500;
@@ -38,6 +39,7 @@ function StoryParagraph({ children }: { children: React.ReactNode }) {
 
 export default function StoryScreen() {
   const buttonPalette = useAppButtonPalette();
+  const headingFontFamily = useLocaleHeadingFontFamily();
   const { markInteractive } = useAppObserve();
   const { id } = useLocalSearchParams();
   const requestedStoryIndex = Number(Array.isArray(id) ? id[0] : id);
@@ -175,7 +177,7 @@ export default function StoryScreen() {
           </Link>
         }
         middleSlot={
-          <H6 textAlign="center">{story.title}</H6>
+          <H6 style={{ fontFamily: headingFontFamily }} textAlign="center">{story.title}</H6>
         }
         endSlot={
           <Button

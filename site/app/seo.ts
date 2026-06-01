@@ -5,7 +5,7 @@ export const siteUrl = (
 ).replace(/\/$/, '');
 
 export const siteName = 'Zen 101';
-export const legalLastUpdated = '2026-05-31';
+export const legalLastUpdated = '2026-06-01';
 
 export const siteDescription =
   'A calm, focused reader for 101 Zen stories, short teachings, and daily reflection.';

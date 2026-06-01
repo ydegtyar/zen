@@ -23,6 +23,9 @@
     },
     "production": {
       "distribution": "store",
+      "android": {
+        "buildType": "app-bundle"
+      },
       "autoIncrement": true,
       "env": {
         "EXPO_PUBLIC_PRIVACY_POLICY_URL": "https://zen-101.vercel.app/privacy",
@@ -32,6 +35,10 @@
     }
   },
   "submit": {
-    "production": {}
+    "production": {
+      "android": {
+        "serviceAccountKeyPath": "./credentials/google-play-service-account.json"
+      }
+    }
   }
 }

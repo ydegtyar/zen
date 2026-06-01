@@ -13,22 +13,30 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import 'react-native-reanimated';
+import { configureObserve, useAppObserve, withObserveRoot } from '@/utils/observe';
+
+configureObserve({
+  integrations: { 'expo-router': true },
+});
 
 SplashScreen.preventAutoHideAsync();
 
-export default function RootLayout() {
+function RootLayout() {
   const [loaded] = useFonts({
     WorkSans_400Regular,
     WorkSans_500Medium,
     WorkSans_600SemiBold,
     WorkSans_700Bold,
   });
+  const { markInteractive } = useAppObserve();
 
   useEffect(() => {
     if (loaded) {
-      SplashScreen.hideAsync();
+      void SplashScreen.hideAsync().finally(() => {
+        markInteractive();
+      });
     }
-  }, [loaded]);
+  }, [loaded, markInteractive]);
 
   if (!loaded) {
     return null;
@@ -37,13 +45,15 @@ export default function RootLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <QueryClientProvider client={queryClient}>
-          <ZenThemeProvider>
-            <Stack screenOptions={{ headerShown: false }}>
-              <Stack.Screen name="(main)" options={{ headerShown: false }} />
-              <Stack.Screen name="+not-found" />
-            </Stack>
-          </ZenThemeProvider>
+        <ZenThemeProvider>
+          <Stack screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="(main)" options={{ headerShown: false }} />
+            <Stack.Screen name="+not-found" />
+          </Stack>
+        </ZenThemeProvider>
       </QueryClientProvider>
     </GestureHandlerRootView>
   );
 }
+
+export default withObserveRoot(RootLayout);

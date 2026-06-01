@@ -12,12 +12,14 @@ expo-env.d.ts
 
 # Native
 .kotlin/
+credentials/
 *.orig.*
 *.jks
 *.p8
 *.p12
 *.key
 *.mobileprovision
+*.service-account.json
 
 # Metro
 .metro-health-check*

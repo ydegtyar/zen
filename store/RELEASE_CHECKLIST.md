@@ -22,11 +22,17 @@ This project is an Expo app. Recommended path: **EAS Build + EAS Submit**.
   - `expo.version` (marketing version) updated when you want a new version name.
   - iOS: `expo.ios.buildNumber` incremented (or let EAS auto-increment).
   - Android: `expo.android.versionCode` incremented (or let EAS auto-increment).
+- Android release format
+  - Production EAS builds are configured as Android App Bundles (`.aab`) for Google Play.
 - Assets
   - App icon, adaptive icon, splash present and look correct on devices.
 - Permissions
   - Verify you only request what you use.
   - If you add anything requiring iOS usage strings or Android permissions, update config accordingly.
+- Google Play app content
+  - Complete Data safety with answers matching the privacy policy and current SDK behavior.
+  - Complete Content rating, Target audience, Ads declaration, App access, and Privacy policy URL.
+  - If using a personal Play Console account created after November 13, 2023, complete Google's required testing track requirements before production.
 - QA
   - Fresh install test (no cached state) + basic regression on real devices.
   - Crash-free launch, navigation, search, favorites, settings.
@@ -40,6 +46,8 @@ This project is an Expo app. Recommended path: **EAS Build + EAS Submit**.
 - Submit:
   - Android: `npm run submit:android`
   - iOS: `npm run submit:ios`
+
+For Android-specific console fields and Data safety notes, see `store/GOOGLE_PLAY_SUBMISSION.md`.
 
 ## Web app publish
 

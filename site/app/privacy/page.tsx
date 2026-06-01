@@ -81,10 +81,10 @@ export default function PrivacyPage() {
 
         <h2>Information you choose to send us</h2>
         <p>
-          If you contact support, your email app may send us the information you include, such as
-          your name, email address, topic, message, device details, screenshots, or bug details. We
-          use support messages only to respond, troubleshoot, improve Zen 101, and maintain records
-          needed to manage support.
+          If you contact support, the support form or your email app may send us the information
+          you include, such as your name, email address, topic, message, device details,
+          screenshots, or bug details. We use support messages only to respond, troubleshoot,
+          improve Zen 101, and maintain records needed to manage support.
         </p>
 
         <h2>Website data</h2>
@@ -124,7 +124,7 @@ export default function PrivacyPage() {
         <h2>Data retention and deletion</h2>
         <p>
           Reading preferences and progress stored on your device remain there until you delete them,
-          reset the app, or uninstall the app. Support emails are kept only as long as reasonably
+          reset the app, or uninstall the app. Support messages are kept only as long as reasonably
           needed to respond, troubleshoot, maintain business records, and comply with legal
           obligations. To request deletion of support messages or other information you sent us, use
           the{' '}

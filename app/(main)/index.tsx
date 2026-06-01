@@ -19,11 +19,12 @@ import { Leaf, Search, X } from '@tamagui/lucide-icons-2';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import Fuse from 'fuse.js';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Button, H4, Input, Spinner, XStack, YStack } from 'tamagui';
 import { lightHaptic } from '@/utils/haptics';
 import { useAppColorScheme } from '@/data/theme';
+import { useAppObserve } from '@/utils/observe';
 
 const PAGE_HORIZONTAL_PADDING = 16;
 
@@ -51,6 +52,7 @@ const SEARCH_BAR_PALETTE = {
 export default function MainScreen() {
   const router = useRouter();
   const params = useLocalSearchParams();
+  const { markInteractive } = useAppObserve();
   const [search, setSearch] = useState('');
   const showFavorites = params.favorites === 'true';
   const { data: favorites = [] } = useFavorites();
@@ -84,6 +86,12 @@ export default function MainScreen() {
     [data, searchIndex, searchTerm]
   );
   const storyKeywords = STORY_KEYWORDS[language] ?? STORY_KEYWORDS[Language.En];
+
+  useEffect(() => {
+    if (!isLoading) {
+      markInteractive();
+    }
+  }, [isLoading, markInteractive]);
 
   const handleFavoritePress = useCallback(() => {
     if (showFavorites) {

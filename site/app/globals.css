@@ -730,6 +730,12 @@ a {
   line-height: 1;
 }
 
+.fieldError {
+  color: #9a3412;
+  font-size: var(--text-xs);
+  line-height: 1.45;
+}
+
 .input,
 .textarea {
   width: 100%;
@@ -785,6 +791,7 @@ a {
 }
 
 .button {
+  appearance: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -795,6 +802,7 @@ a {
   border: 1px solid var(--button-border);
   background: var(--button-bg);
   color: #ffffff;
+  font: inherit;
   font-weight: 700;
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
   transition:
@@ -814,6 +822,31 @@ a {
 .button:active {
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
   transform: translateY(0) scale(0.985);
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.68;
+  transform: none;
+}
+
+.button:disabled:hover {
+  background: var(--button-bg);
+  border-color: var(--button-border);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+
+.formStatus {
+  flex: 1 1 240px;
+  margin: 0;
+  align-self: center;
+  color: rgba(11, 11, 11, 0.68);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+
+.formStatusError {
+  color: #9a3412;
 }
 
 .small {

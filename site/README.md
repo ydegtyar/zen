@@ -16,7 +16,8 @@ Configure on Vercel (Project → Settings → Environment Variables):
 
 - `NEXT_PUBLIC_APP_STORE_URL` — link to the iOS App Store listing
 - `NEXT_PUBLIC_PLAY_STORE_URL` — link to the Google Play listing
-- `NEXT_PUBLIC_SUPPORT_EMAIL` — email used by the Support form
+- `SUPABASE_URL` — Supabase project URL used by the feedback form API route
+- `SUPABASE_PUBLISHABLE_KEY` — Supabase publishable/anon key with insert access to `zen_feedback`
 
 ## Canonical domain
 

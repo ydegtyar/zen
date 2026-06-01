@@ -7,10 +7,12 @@ import { resetReadingProgress } from '@/data/reading-progress';
 import { setTheme, Theme, useAppTheme } from '@/data/theme';
 import { ArrowLeft, Contrast, Moon, RefreshCcw, Sun } from '@tamagui/lucide-icons-2';
 import { Link } from 'expo-router';
+import { useEffect } from 'react';
 import { Adapt, Button, Dialog, H4, H5, ScrollView, Separator, Sheet, Text, XStack, YStack } from 'tamagui';
 import { lightHaptic } from '@/utils/haptics';
 import { getAppLinks } from '@/constants/appLinks';
 import { openExternalUrl } from '@/utils/openExternalUrl';
+import { useAppObserve } from '@/utils/observe';
 
 const LANGUAGES = [
   { code: Language.En, label: 'English' },
@@ -29,7 +31,7 @@ type PolicySection = {
   body: string | string[];
 };
 
-const POLICY_LAST_UPDATED = new Date().toISOString().slice(0, 10);
+const POLICY_LAST_UPDATED = '2026-05-31';
 
 const PRIVACY_SECTIONS: PolicySection[] = [
   {
@@ -166,10 +168,15 @@ function PolicyDialog({
 }
 
 export default function SettingsScreen() {
+  const { markInteractive } = useAppObserve();
   const { data: language } = useLanguage();
   const { data: theme } = useAppTheme();
   const links = getAppLinks();
   const buttonPalette = useAppButtonPalette();
+
+  useEffect(() => {
+    markInteractive();
+  }, [markInteractive]);
   
   return (
     <YStack flex={1} backgroundColor="$background">

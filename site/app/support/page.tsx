@@ -40,8 +40,8 @@ export default function SupportPage() {
       <div className="contentCard">
         <h1>Support</h1>
         <p>
-          Send feedback, report a bug, ask an account question, or get help with Zen 101. This form
-          opens your email client with the message pre-filled.
+          Send feedback, report a bug, ask an account question, or get help with Zen 101. Messages
+          submitted here are stored so we can review and respond when needed.
         </p>
 
         <SupportForm />

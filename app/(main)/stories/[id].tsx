@@ -13,6 +13,7 @@ import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import { InteractionManager, LayoutChangeEvent, NativeScrollEvent, NativeSyntheticEvent, ScrollView, useWindowDimensions, View } from 'react-native';
 import { Button, H6, Spinner, Text, XStack, YStack } from 'tamagui';
 import { lightHaptic } from '@/utils/haptics';
+import { useAppObserve } from '@/utils/observe';
 
 const CONTINUE_READING_SET_DELAY_MS = 500;
 const PLACEHOLDER_IMAGE = require('@/assets/images/placeholder.png');
@@ -37,6 +38,7 @@ function StoryParagraph({ children }: { children: React.ReactNode }) {
 
 export default function StoryScreen() {
   const buttonPalette = useAppButtonPalette();
+  const { markInteractive } = useAppObserve();
   const { id } = useLocalSearchParams();
   const requestedStoryIndex = Number(Array.isArray(id) ? id[0] : id);
   const trackableStoryIndex = Number.isFinite(requestedStoryIndex) && requestedStoryIndex > 0
@@ -122,6 +124,12 @@ export default function StoryScreen() {
       };
     }, [setLastRead, storyIndex])
   );
+
+  useEffect(() => {
+    if (!isLoading && story) {
+      markInteractive({ params: { storyId: story.index } });
+    }
+  }, [isLoading, markInteractive, story]);
 
   const handleScroll = useCallback((event: NativeSyntheticEvent<NativeScrollEvent>) => {
     scrollYRef.current = event.nativeEvent.contentOffset.y;

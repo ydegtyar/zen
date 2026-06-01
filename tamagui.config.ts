@@ -4,6 +4,10 @@ import { tokens as baseTokens } from '@tamagui/themes'
 import { createTamagui } from 'tamagui'
 import { themes } from './themes'
 
+const isWeb = process.env.EXPO_OS === 'web'
+const headingFontFamily = isWeb ? 'WorkSans_700Bold, sans-serif' : 'WorkSans_700Bold'
+const bodyFontFamily = isWeb ? 'WorkSans_400Regular, sans-serif' : 'WorkSans_400Regular'
+
 const config = createTamagui({
   defaultTheme: 'light',
   shouldAddPrefersColorThemes: false,
@@ -12,7 +16,7 @@ const config = createTamagui({
   shorthands,
   fonts: {
     heading: {
-      family: 'WorkSans_700Bold',
+      family: headingFontFamily,
       size: {
         1: 12,
         2: 14,
@@ -49,7 +53,7 @@ const config = createTamagui({
       },
     },
     body: {
-      family: 'WorkSans_400Regular',
+      family: bodyFontFamily,
       size: {
         1: 12,
         2: 14,

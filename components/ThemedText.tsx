@@ -1,6 +1,16 @@
-import { StyleSheet, Text, type TextProps } from 'react-native';
+import { Platform, StyleSheet, Text, type TextProps } from 'react-native';
 
 import { useThemeColor } from '@/hooks/useThemeColor';
+
+const bodyFontFamily = Platform.select({
+  web: 'WorkSans_400Regular, sans-serif',
+  default: 'WorkSans_400Regular',
+});
+
+const headingFontFamily = Platform.select({
+  web: 'WorkSans_700Bold, sans-serif',
+  default: 'WorkSans_700Bold',
+});
 
 export type ThemedTextProps = TextProps & {
   lightColor?: string;
@@ -35,24 +45,29 @@ export function ThemedText({
 
 const styles = StyleSheet.create({
   default: {
+    fontFamily: bodyFontFamily,
     fontSize: 16,
     lineHeight: 24,
   },
   defaultSemiBold: {
+    fontFamily: bodyFontFamily,
     fontSize: 16,
     lineHeight: 24,
     fontWeight: '600',
   },
   title: {
+    fontFamily: headingFontFamily,
     fontSize: 32,
     fontWeight: 'bold',
     lineHeight: 32,
   },
   subtitle: {
+    fontFamily: headingFontFamily,
     fontSize: 20,
     fontWeight: 'bold',
   },
   link: {
+    fontFamily: bodyFontFamily,
     lineHeight: 30,
     fontSize: 16,
     color: '#0a7ea4',

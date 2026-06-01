@@ -25,11 +25,7 @@ export const metadata: Metadata = {
   description: siteDescription,
   manifest: '/manifest.webmanifest',
   icons: {
-    icon: [
-      { url: '/favicon.ico', sizes: '32x32' },
-      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-      { url: '/icons/zen-101-icon.svg', type: 'image/svg+xml' },
-    ],
+    icon: [{ url: '/favicon.ico', sizes: '16x16 32x32', type: 'image/x-icon' }],
     apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
   },
   appleWebApp: {

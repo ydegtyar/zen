@@ -3,7 +3,7 @@ import { Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from 'tamagui';
 
-const WEB_LAYOUT_TOP_PADDING = 32;
+const WEB_LAYOUT_TOP_PADDING = 16;
 
 export default function MainLayout() {
   const theme = useTheme();
